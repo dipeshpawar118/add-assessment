@@ -39,3 +39,32 @@ test('handles new line as a delimiter', () => {
     expect(add("1\n2\n3")).toBe(6);
     expect(add("1,2\n3,4")).toBe(10);
 });
+
+test('handles new line as a delimiter with whitespace', () => {
+    expect(add("1\n2, 3")).toBe(6);
+    expect(add("1 \n2\n3")).toBe(6);
+    expect(add(" 1, 2 \n 3, 4")).toBe(10);
+});
+
+test('handles new line as a delimiter with negative', () => {
+    expect(() => add("-1\n2, -3")).toThrow("Negative numbers not allowed: -1, -3");
+    expect(() => add("1 \n-2\n-3")).toThrow("Negative numbers not allowed: -2, -3");
+    expect(() => add(" -1, -2 \n -3, -4")).toThrow("Negative numbers not allowed: -1, -2, -3, -4")
+});
+
+
+test('supports custom delimiters', () => {
+    expect(add("//;\n1;2")).toBe(3);
+    expect(add("//-\n5-3-2")).toBe(10);
+    expect(add("//|\n4|8|12")).toBe(24);
+});
+
+test('supports different delimiters and handles spaces', () => {
+    expect(add("//;\n 1 ; 2 ; 3 ")).toBe(6);
+});
+
+
+test('supports different delimiters and negative', () => {
+    expect(()=>add("//;\n 1 ; -2 ; -3 ")).toBe(6).toThrow("Negative numbers not allowed: -2, -3")
+});
+
