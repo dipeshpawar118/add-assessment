@@ -1,8 +1,11 @@
 function add(numbers) {
     if (!numbers) return 0; // Handle empty string case
+let delimiter = ',';
+     // Replace all newline characters with the delimiter (comma or custom)
+     numbers = numbers.replace(/\n/g, delimiter);
 
     const numArray = numbers
-    .split(',')
+    .split(delimiter)
     .map(num => parseInt(num.trim(), 10) || 0); // Convert to numbers and handle non-numeric values
 
 
