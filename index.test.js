@@ -65,6 +65,12 @@ test('supports different delimiters and handles spaces', () => {
 
 
 test('supports different delimiters and negative', () => {
-    expect(()=>add("//;\n 1 ; -2 ; -3 ")).toBe(6).toThrow("Negative numbers not allowed: -2, -3")
+    expect(()=>add("//;\n 1 ; -2 ; -3 ")).toThrow("Negative numbers not allowed: -2, -3")
+});
+
+test('supports custom delimiters with new lines', () => {
+    expect(add("//;\n1;2\n3")).toBe(6); 
+    expect(add("//|\n4|8\n12")).toBe(24); 
+    expect(add("//-\n5-3\n2-1")).toBe(11);
 });
 
