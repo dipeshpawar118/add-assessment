@@ -1,6 +1,14 @@
 function add(numbers) {
     if (!numbers) return 0; // Handle empty string case
-let delimiter = ',';
+    let delimiter = ',';
+
+        // Check if the input has a custom delimiter
+        const delimiterMatch = numbers.match(/^\/\/(.+)\n/);
+        if (delimiterMatch) {
+            delimiter = delimiterMatch[1]; // Extract delimiter
+            numbers = numbers.split(delimiter+'\n')[1]; // Extract numbers after newline
+        }
+
      // Replace all newline characters with the delimiter (comma or custom)
      numbers = numbers.replace(/\n/g, delimiter);
 
