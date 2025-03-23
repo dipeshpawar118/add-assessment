@@ -28,7 +28,7 @@ test('handles non-numeric values by treating them as 0', () => {
     expect(add("2,abc,5")).toBe(7);
 });
 
-test('handles negative numbers correctly', () => {
-    expect(add("-1,-2,-3")).toBe(-6);
-    expect(add("-10,5")).toBe(-5);
+test('throws an error for negative numbers', () => {
+    expect(() => add("-1,-2,-3")).toThrow("Negative numbers not allowed: -1, -2, -3");
+    expect(() => add("-10,5")).toThrow("Negative numbers not allowed: -10");
 });
